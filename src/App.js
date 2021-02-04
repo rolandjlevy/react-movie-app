@@ -18,6 +18,7 @@ function App() {
   useEffect(() => {
 		moviesAPI('batman').then(result => {
       if (result.Search) {
+        console.log(result.Search[0])
         setMovies(result.Search);
       }
     })

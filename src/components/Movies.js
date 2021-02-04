@@ -1,10 +1,11 @@
 import React from 'react';
+import Movie from './Movie';
 
 const Movies = ({movies}) => {
   return (
     <div>
-      <ul>
-        {movies.map(movie => (<li key={movie.imdbID}>{movie.Title}</li>))}
+      <ul className="container">
+        {movies.map(movie => (<Movie key={movie.imdbID} movie={movie} />))}
       </ul>
     </div>
   );
