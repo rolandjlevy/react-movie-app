@@ -1,5 +1,16 @@
+body {
+  margin: 30px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f0f0;
+  font-family: 'Zilla Slab', serif;
+}
+
 header > h1 {
   margin: 0 0 20px 10px;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 600;
+  font-size: 3rem;
 }
 
 .container {
@@ -14,15 +25,44 @@ header > h1 {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 200px;
+  width: calc(25vw - 100px);
   margin: 10px;
-  padding: 10px;
-  background-color: #f3f3f3;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+
+@media only screen and (max-width: 1200px) {
+  .container > li {
+    width: calc(33.3vw - 100px);
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .container > li {
+    width: calc(50vw - 100px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container > li {
+    width: calc(100vw - 100px);
+  }
+}
+
+.container > li:hover {
+  transform: scale(1.05);
 }
 
 .container > li > h3 {
   word-wrap: break-word;
   margin: 0;
+  font-weight: 600;
+  font-size: calc(1rem + 1vw);
+  line-height: 1;
 }
 
 .container > li > img {
@@ -35,7 +75,7 @@ header > h1 {
   text-align: center;
   padding: 12px;
   color: #fff;
-  background-color: #7700ff;
+  background-color: hsl(255, 100%, 65%);
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.2s ease;
@@ -43,19 +83,5 @@ header > h1 {
   text-transform: uppercase;
 }
 .container > li > a:hover {
-  background-color: #5700bb;
-}
-
-body {
-  margin: 30px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: hsl(255, 100%, 60%);
 }

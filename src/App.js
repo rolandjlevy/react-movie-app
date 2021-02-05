@@ -18,14 +18,13 @@ function App() {
   useEffect(() => {
 		moviesAPI('batman').then(result => {
       if (result.Search) {
-        console.log(result.Search[0])
         setMovies(result.Search);
       }
     })
 	}, []);
   return (
     <div>
-      <Header text="React Movie App" />
+      <Header text="Movie Viewer" />
       <Movies movies={movies} />
     </div>
   );
