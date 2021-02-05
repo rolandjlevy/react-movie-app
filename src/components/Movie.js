@@ -7,7 +7,7 @@ const Movie = ({movie}) => {
     <li>
       <h3>{movie.Title}{year}</h3>
       <img src={movie.Poster} alt={movie.Title} />
-      <a href={url}>Find out more...</a>
+      <a href={url}>Find out more</a>
     </li>
   );
 }
