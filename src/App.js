@@ -7,25 +7,41 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 
 function App() {
 	const [movies, setMovies] = useState([]);
-  const moviesAPI = (searchInput) => {
+	const [totalResults, setTotalResults] = useState(0);
+	const [totalPages, setTotalPages] = useState(0);
+	const [page, setPageNum] = useState(1);
+  const moviesAPI = (searchInput, page) => {
     return new Promise((resolve, reject) => {
-      fetch(`${baseUrl}/?s=${searchInput}&apikey=${apikey}`)
+      fetch(`${baseUrl}/?s=${searchInput}&apikey=${apikey}&page=${page}`)
       .then(res => res.json())
       .then(data => resolve(data))
       .catch(error => reject(error));
     });
   }
-  useEffect(() => {
-		moviesAPI('batman').then(result => {
-      if (result.Search) {
+  const getMovies = (page) => {
+    moviesAPI('batman', page).then(result => {
+      if (result) {
+        setPageNum(page);
         setMovies(result.Search);
+        setTotalPages(Math.ceil(result.totalResults / 10));
+        setTotalResults(result.totalResults);
       }
     })
-	}, []);
+  }
+  useEffect(() => {
+    getMovies(1);
+  }, []);
   return (
     <div>
       <Header text="Movie Viewer" />
-      <Movies movies={movies} />
+      {movies.length > 0 ?
+      (<Movies 
+        movies={movies} 
+        totalResults={totalResults} 
+        totalPages={totalPages}
+        onKeyUp={getMovies}
+        page={page}
+      />) : ("No movies to show")}
     </div>
   );
 }

@@ -13,7 +13,7 @@ header > h1 {
   font-size: 3rem;
 }
 
-.container {
+.movies > .container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -21,7 +21,15 @@ header > h1 {
   padding: 0;
 }
 
-.container > li {
+.movies > h3 {
+  margin: 0 0 10px 10px;
+}
+
+.movies > h3 > input[type='number'] {
+  padding: 3px 0 3px 6px;
+}
+
+.movies > .container > li {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -36,28 +44,28 @@ header > h1 {
 }
 
 @media only screen and (max-width: 1200px) {
-  .container > li {
+  .movies > .container > li {
     width: calc(33.3vw - 100px);
   }
 }
 
 @media only screen and (max-width: 840px) {
-  .container > li {
+  .movies > .container > li {
     width: calc(50vw - 100px);
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .container > li {
+  .movies > .container > li {
     width: calc(100vw - 100px);
   }
 }
 
-.container > li:hover {
+.movies > .container > li:hover {
   transform: scale(1.05);
 }
 
-.container > li > h3 {
+.movies > .container > li > h3 {
   word-wrap: break-word;
   margin: 0;
   font-weight: 600;
@@ -65,13 +73,13 @@ header > h1 {
   line-height: 1;
 }
 
-.container > li > img {
+.movies > .container > li > img {
   max-height: 200px;
   object-fit: cover;
   margin: 10px 0;
 }
 
-.container > li > a {
+.movies > .container > li > a {
   text-align: center;
   padding: 12px;
   color: #fff;
@@ -82,6 +90,6 @@ header > h1 {
   font-weight: 800;
   text-transform: uppercase;
 }
-.container > li > a:hover {
+.movies > .container > li > a:hover {
   background-color: hsl(255, 100%, 60%);
 }
