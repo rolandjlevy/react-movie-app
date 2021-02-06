@@ -40,6 +40,8 @@ header > h1 {
 
 .movies > h3 > button.btn {
   background-color: #fff;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .movies > h3 > button.btn:hover {

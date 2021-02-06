@@ -6,31 +6,35 @@ const apikey = process.env.REACT_APP_OMDB_API_KEY;
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 function App() {
+
 	const [movies, setMovies] = useState([]);
 	const [totalResults, setTotalResults] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
 	const [searchInput, setSearchInput] = useState('');
 	const [page, setPageNum] = useState(1);
-  const moviesAPI = (searchInput, page) => {
+	const [defaultPage, setDefaultPageNum] = useState(1);
+
+  const moviesAPI = (s, page) => {
     return new Promise((resolve, reject) => {
-      fetch(`${baseUrl}/?s=${searchInput}&apikey=${apikey}&page=${page}`)
+      fetch(`${baseUrl}/?s=${s}&apikey=${apikey}&page=${page}`)
       .then(res => res.json())
       .then(data => resolve(data))
       .catch(error => reject(error));
     });
   }
 
-  const getMovies = useCallback((searchInput, page) => {
-    moviesAPI(searchInput, page).then(result => {
+  const getMovies = useCallback((s, page = 1) => {
+    moviesAPI(s, page).then(result => {
       if (result) {
         setMovies(result.Search);
         setTotalResults(result.totalResults);
         setTotalPages(Math.ceil(result.totalResults / 10));
-        setSearchInput(searchInput);
+        setSearchInput(s);
         setPageNum(page);
+        setDefaultPageNum(1);
       }
     });
-  }, []) 
+  }, []);
 
   useEffect(() => { 
     getMovies('batman', 1);
@@ -45,8 +49,10 @@ function App() {
         totalResults={totalResults} 
         totalPages={totalPages}
         onKeyUp={getMovies}
+        onClick={getMovies}
         searchInput={searchInput}
         page={page}
+        defaultPage={defaultPage}
       />) : ("No movies to show")}
     </div>
   );
