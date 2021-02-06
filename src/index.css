@@ -4,6 +4,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f0f0f0;
   font-family: 'Zilla Slab', serif;
+  font-size: 1rem;
 }
 
 header > h1 {
@@ -25,8 +26,25 @@ header > h1 {
   margin: 0 0 10px 10px;
 }
 
-.movies > h3 > input[type='number'] {
-  padding: 3px 0 3px 6px;
+.movies > h3 > input[type='number'],
+.movies > h3 > input[type='text'],
+.movies > h3 > button.btn {
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 2px 6px 2px 6px;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.movies > h3 > button.btn {
+  background-color: #fff;
+}
+
+.movies > h3 > button.btn:hover {
+  color: #fff;
+  background-color: #000;
 }
 
 .movies > .container > li {

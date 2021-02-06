@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import Movies from './components/Movies';
 
@@ -9,6 +9,7 @@ function App() {
 	const [movies, setMovies] = useState([]);
 	const [totalResults, setTotalResults] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
+	const [searchInput, setSearchInput] = useState('');
 	const [page, setPageNum] = useState(1);
   const moviesAPI = (searchInput, page) => {
     return new Promise((resolve, reject) => {
@@ -18,19 +19,23 @@ function App() {
       .catch(error => reject(error));
     });
   }
-  const getMovies = (page) => {
-    moviesAPI('batman', page).then(result => {
+
+  const getMovies = useCallback((searchInput, page) => {
+    moviesAPI(searchInput, page).then(result => {
       if (result) {
-        setPageNum(page);
         setMovies(result.Search);
-        setTotalPages(Math.ceil(result.totalResults / 10));
         setTotalResults(result.totalResults);
+        setTotalPages(Math.ceil(result.totalResults / 10));
+        setSearchInput(searchInput);
+        setPageNum(page);
       }
-    })
-  }
-  useEffect(() => {
-    getMovies(1);
-  }, []);
+    });
+  }, []) 
+
+  useEffect(() => { 
+    getMovies('batman', 1);
+  }, [getMovies]);
+  
   return (
     <div>
       <Header text="Movie Viewer" />
@@ -40,6 +45,7 @@ function App() {
         totalResults={totalResults} 
         totalPages={totalPages}
         onKeyUp={getMovies}
+        searchInput={searchInput}
         page={page}
       />) : ("No movies to show")}
     </div>
