@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Movie from './Movie';
 
 const Movies = ({movies, totalResults, totalPages, onKeyUp, onClick, searchInput, page, defaultPage}) => {
-  const [inputText, setInputText] = useState('');
-  const handleKeyupPages = (e, searchInput) => {
+  const [inputText, setInputText] = useState(searchInput);
+  const [dPage, setDefaultPage] = useState(1);
+  const handleKeyupPages = (e, s) => {
     const page = e.target.value;
     const pagesInRange = Number(page) <= totalPages && Number(page) > 0;
     if (e.key.toLowerCase() === "enter" && pagesInRange && page.length > 0) {
-      onKeyUp(searchInput, page);
+      onKeyUp(s, page);
     }
   }
   const handleChangeInput = (e) => {
@@ -18,11 +19,13 @@ const Movies = ({movies, totalResults, totalPages, onKeyUp, onClick, searchInput
   }
   useEffect(() => {
     setInputText(searchInput);
-  }, [searchInput]);
+    setDefaultPage(1);
+    console.log('Movies > useEffect > dPage is', {searchInput, dPage})
+  }, [searchInput, dPage]);
   return (
     <section className="movies">
       <h3>
-        {totalResults} results for '{searchInput}' ~ page <input id="page-num" type="number" min="1" max={totalPages} step="1" defaultValue={defaultPage} onKeyUp={(e) => handleKeyupPages(e, searchInput) } /> of {totalPages}
+        {totalResults} results for '{searchInput}' ~ page <input id="page-num" type="number" min="1" max={totalPages} step="1" defaultValue={dPage} onKeyUp={(e) => handleKeyupPages(e, searchInput) } /> of {totalPages}
       </h3>
       <h3>
         <input id="search-input" type="text" defaultValue={searchInput} onChange={(e) => handleChangeInput(e)} />

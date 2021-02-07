@@ -1,6 +1,7 @@
 ### Ideas
 
-- add pagination. see documentation
+- save favourites in localStorage
+- create a new component for the form elements and move the form and header into a nav tag which is fixed
 
 ### Inspiration
 - https://marc.dev/

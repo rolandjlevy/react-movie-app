@@ -23,6 +23,10 @@ function App() {
     });
   }
 
+  // const test = (s, page) => {
+  //   console.log({s, page})
+  // }
+
   const getMovies = useCallback((s, page = 1) => {
     moviesAPI(s, page).then(result => {
       if (result) {
@@ -36,13 +40,13 @@ function App() {
     });
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     getMovies('batman', 1);
   }, [getMovies]);
   
   return (
     <div>
-      <Header text="Movie Viewer" />
+      <Header text="Movie Viewer 🎞️" />
       {movies.length > 0 ?
       (<Movies 
         movies={movies} 
