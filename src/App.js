@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
+import MovieList from './components/MovieList';
 import Movies from './components/Movies';
 
 const apikey = process.env.REACT_APP_OMDB_API_KEY;
@@ -45,20 +46,23 @@ function App() {
   }, [getMovies]);
   
   return (
-    <div>
-      <Header text="Movie Viewer 🎞️" />
-      {movies.length > 0 ?
-      (<Movies 
-        movies={movies} 
-        totalResults={totalResults} 
-        totalPages={totalPages}
-        onKeyUp={getMovies}
-        onClick={getMovies}
-        searchInput={searchInput}
-        page={page}
-        defaultPage={defaultPage}
-      />) : ("No movies to show")}
-    </div>
+    <main>
+      <header>
+        <Header text="Movie Viewer 🎞️" />
+        {movies.length > 0 ?
+        (<Movies 
+          movies={movies} 
+          totalResults={totalResults} 
+          totalPages={totalPages}
+          onKeyUp={getMovies}
+          onClick={getMovies}
+          searchInput={searchInput}
+          page={page}
+          defaultPage={defaultPage}
+        />) : ("No movies to show")}
+      </header>
+      <MovieList movies={movies} />
+    </main>
   );
 }
 

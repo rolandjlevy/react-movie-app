@@ -1,10 +1,19 @@
 body {
-  margin: 30px;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f0f0f0;
   font-family: 'Zilla Slab', serif;
   font-size: 1rem;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  background-color: #f0f0f0;
+  box-shadow: 0 1px 15px 1px #00000066;
+  padding: 20px;
 }
 
 header > h1 {
@@ -14,21 +23,23 @@ header > h1 {
   font-size: 3rem;
 }
 
-.movies > .container {
+.container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   margin: 0;
   padding: 0;
+  position: relative;
+  top: 200px;
 }
 
-.movies > h3 {
+nav > h3 {
   margin: 0 0 10px 10px;
 }
 
-.movies > h3 > input[type='number'],
-.movies > h3 > input[type='text'],
-.movies > h3 > button.btn {
+nav > h3 > input[type='number'],
+nav > h3 > input[type='text'],
+nav > h3 > button.btn {
   display: inline-block;
   border: 2px solid #ccc;
   border-radius: 5px;
@@ -38,18 +49,18 @@ header > h1 {
   font-size: 1.15rem;
 }
 
-.movies > h3 > button.btn {
+nav > h3 > button.btn {
   background-color: #fff;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
-.movies > h3 > button.btn:hover {
+nav > h3 > button.btn:hover {
   color: #fff;
   background-color: #000;
 }
 
-.movies > .container > li {
+.container > li {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -64,28 +75,28 @@ header > h1 {
 }
 
 @media only screen and (max-width: 1200px) {
-  .movies > .container > li {
+  .container > li {
     width: calc(33.3vw - 100px);
   }
 }
 
 @media only screen and (max-width: 840px) {
-  .movies > .container > li {
+  .container > li {
     width: calc(50vw - 100px);
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .movies > .container > li {
+  .container > li {
     width: calc(100vw - 100px);
   }
 }
 
-.movies > .container > li:hover {
+.container > li:hover {
   transform: scale(1.05);
 }
 
-.movies > .container > li > h3 {
+.container > li > h3 {
   word-wrap: break-word;
   margin: 0;
   font-weight: 600;
@@ -93,13 +104,13 @@ header > h1 {
   line-height: 1;
 }
 
-.movies > .container > li > img {
+.container > li > img {
   max-height: 200px;
   object-fit: cover;
   margin: 10px 0;
 }
 
-.movies > .container > li > a {
+.container > li > a {
   text-align: center;
   padding: 12px;
   color: #fff;
@@ -110,6 +121,6 @@ header > h1 {
   font-weight: 800;
   text-transform: uppercase;
 }
-.movies > .container > li > a:hover {
+.container > li > a:hover {
   background-color: hsl(255, 100%, 60%);
 }
