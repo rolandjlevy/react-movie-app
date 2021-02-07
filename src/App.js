@@ -48,7 +48,7 @@ function App() {
   return (
     <main>
       <header>
-        <Header text="Movie Viewer 🎞️" />
+        <Header text="Movie Viewer 🎥" />
         {movies.length > 0 ?
         (<Movies 
           movies={movies} 
