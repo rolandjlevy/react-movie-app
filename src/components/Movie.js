@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Movie = ({movie}) => {
+const Moviee = ({movie}) => {
   const url = `https://www.imdb.com/title/${movie.imdbID}`;
   const year = movie.Year ? ` (${movie.Year})` : '';
   return (
@@ -12,4 +12,4 @@ const Movie = ({movie}) => {
   );
 }
 
-export default Movie;
+export default Moviee;
