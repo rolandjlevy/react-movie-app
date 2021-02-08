@@ -3,6 +3,13 @@
 - save favourites in localStorage
 - create a new component for the form elements and move the form and header into a nav tag which is fixed
 
+- Help from John: https://twitter.com/AuMayeung
+//   You should have page in the array in the 2nd argument in useCallback.
+
+// Then just pass in a function to set the page value to the onKeyUp prop.
+
+// And then you have another useEffect call to watch the page value.
+
 ### Inspiration
 - https://marc.dev/
 - Tutorial: https://www.freecodecamp.org/news/react-movie-app-tutorial/

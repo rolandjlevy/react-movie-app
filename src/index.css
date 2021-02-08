@@ -63,8 +63,7 @@ nav > h3 > button.btn {
 }
 
 nav > h3 > button.btn:hover {
-  color: #000;
-  background-color: #fff;
+  background-color: #000;
 }
 
 nav > h3 > button.btn {
