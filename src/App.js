@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import Header from './components/Header';
 import MovieList from './components/MovieList';
-import Movies from './components/Movies';
+import Form from './components/Form';
 
 const apikey = process.env.REACT_APP_OMDB_API_KEY;
 const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -9,10 +9,8 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 function App() {
 
 	const [movies, setMovies] = useState({});
-	const [searchInput, setSearchInput] = useState('');
-	const [page, setPageNum] = useState(0);
 
-  const moviesAPI = (s, p = 1) => {
+  const moviesAPI = (s, p) => {
     return new Promise((resolve, reject) => {
       fetch(`${baseUrl}/?s=${s}&apikey=${apikey}&page=${p}`)
       .then(res => res.json())
@@ -21,39 +19,22 @@ function App() {
     });
   }
 
-  const getNewMovie = useCallback((s) => {
-    moviesAPI(s).then(result => {
+  const getNewMovie = useCallback((s, p) => {
+    moviesAPI(s, p).then(result => {
       if (result) {
         setMovies(result);
-        setSearchInput(s);
       }
     });
   }, [setMovies]);
 
-  const paginateMovie = useCallback((s, p) => {
-    moviesAPI(s, p).then(result => {
-      if (result) {
-        setMovies(result);
-        setSearchInput(s);
-        setPageNum(p);
-      }
-    });
-  }, [setMovies, setPageNum]);
-
-  useEffect(() => {
-    getNewMovie('batman');
-  }, [getNewMovie]);
-  
   return (
     <main>
       <header>
         <Header text="Movie Viewer 🎥" />
-        <Movies 
+        <Form 
           movies={movies}
-          onKeyUp={paginateMovie}
+          onKeyUp={getNewMovie}
           onClick={getNewMovie}
-          searchInput={searchInput}
-          page={page}
         />
       </header>
       {movies.Search && movies.Search.length > 0 ?
