@@ -53,6 +53,7 @@ nav > h3 > input[type='text'] {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   border-right: none;
+  padding: 6px 6px 4px 6px;
 }
 
 nav > h3 > button.btn {
@@ -62,13 +63,18 @@ nav > h3 > button.btn {
   cursor: pointer;
 }
 
-nav > h3 > button.btn:hover {
-  background-color: #000;
-}
-
 nav > h3 > button.btn {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+}
+
+nav > h3 > button.btn:hover:not(:disabled) {
+  background-color: #000;
+}
+
+nav > h3 > button.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .container > li {

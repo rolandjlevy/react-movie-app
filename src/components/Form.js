@@ -33,15 +33,21 @@ const Form = ({movies, onKeyUp, onClick}) => {
   }, [movies, inputText]);
   return (
     <nav>
-    
+
       <h3>
         <input 
           id="search-input" 
           type="text" 
           defaultValue={inputText} 
-          onChange={(e) => handleChangeInput(e)} 
+          onChange={(e) => handleChangeInput(e)}
+          placeholder="Enter a movie title..."
         />
-        <button className="btn" onClick={handleClickInput}>New search</button>
+        <button 
+          className="btn" 
+          onClick={handleClickInput}
+          disabled={!inputText.length}
+        >Search <span role="img" aria-label="search">🔎</span>
+        </button>
       </h3>
 
       {movies.Search && movies.Search.length > 0 ? 
