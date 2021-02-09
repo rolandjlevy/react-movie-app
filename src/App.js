@@ -8,60 +8,56 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 
 function App() {
 
-	const [movies, setMovies] = useState([]);
-	const [totalResults, setTotalResults] = useState(0);
-	const [totalPages, setTotalPages] = useState(0);
+	const [movies, setMovies] = useState({});
 	const [searchInput, setSearchInput] = useState('');
-	const [page, setPageNum] = useState(1);
-	const [defaultPage, setDefaultPageNum] = useState(1);
+	const [page, setPageNum] = useState(0);
 
-  const moviesAPI = (s, page) => {
+  const moviesAPI = (s, p = 1) => {
     return new Promise((resolve, reject) => {
-      fetch(`${baseUrl}/?s=${s}&apikey=${apikey}&page=${page}`)
+      fetch(`${baseUrl}/?s=${s}&apikey=${apikey}&page=${p}`)
       .then(res => res.json())
       .then(data => resolve(data))
       .catch(error => reject(error));
     });
   }
 
-  // const test = (s, page) => {
-  //   console.log({s, page})
-  // }
-
-  const getMovies = useCallback((s, page = 1) => {
-    moviesAPI(s, page).then(result => {
+  const getNewMovie = useCallback((s) => {
+    moviesAPI(s).then(result => {
       if (result) {
-        setMovies(result.Search);
-        setTotalResults(result.totalResults);
-        setTotalPages(Math.ceil(result.totalResults / 10));
+        setMovies(result);
         setSearchInput(s);
-        setPageNum(page);
-        setDefaultPageNum(1);
       }
     });
-  }, []);
+  }, [setMovies]);
+
+  const paginateMovie = useCallback((s, p) => {
+    moviesAPI(s, p).then(result => {
+      if (result) {
+        setMovies(result);
+        setSearchInput(s);
+        setPageNum(p);
+      }
+    });
+  }, [setMovies, setPageNum]);
 
   useEffect(() => {
-    getMovies('batman', 1);
-  }, [getMovies]);
+    getNewMovie('batman');
+  }, [getNewMovie]);
   
   return (
     <main>
       <header>
         <Header text="Movie Viewer 🎥" />
-        {movies.length > 0 ?
-        (<Movies 
-          movies={movies} 
-          totalResults={totalResults} 
-          totalPages={totalPages}
-          onKeyUp={getMovies}
-          onClick={getMovies}
+        <Movies 
+          movies={movies}
+          onKeyUp={paginateMovie}
+          onClick={getNewMovie}
           searchInput={searchInput}
           page={page}
-          defaultPage={defaultPage}
-        />) : ("No movies to show")}
+        />
       </header>
-      <MovieList movies={movies} />
+      {movies.Search && movies.Search.length > 0 ?
+        (<MovieList movies={movies.Search} />) : ("No movies to show")}
     </main>
   );
 }
