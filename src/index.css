@@ -37,6 +37,21 @@ nav > h3 {
   margin: 0 0 10px 10px;
 }
 
+nav > h3 > a.btn {
+  display: inline-block;
+  margin: 2px 6px;
+  font-size: 1.25rem;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  pointer-events: initial;
+}
+
+nav > h3 > a.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 nav > h3 > input[type='number'],
 nav > h3 > input[type='text'],
 nav > h3 > button.btn {
@@ -58,6 +73,7 @@ nav > h3 > input[type='text'] {
 
 nav > h3 > button.btn {
   color: #fff;
+  padding: 2px 10px;
   background-color: #ff9900;
   transition: all 0.2s ease;
   cursor: pointer;

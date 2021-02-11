@@ -11,6 +11,9 @@ const Form = ({movies, onKeyUp, onClick}) => {
   const handleChangePages = (e) => {
     setPageNum(e.target.value);
   }
+  const handleClickPages = (e) => {
+    onClick(inputText, page);
+  }
   const handleKeyupPages = (e) => {
     const p = e.target.value;
     const pagesInRange = Number(p) <= totalPages && Number(p) > 0;
@@ -62,6 +65,11 @@ const Form = ({movies, onKeyUp, onClick}) => {
           value={page}
           onKeyUp={(e) => handleKeyupPages(e)} 
           onChange={(e) => handleChangePages(e) } /> of {totalPages}
+        <a 
+          className={page < 1 ? 'btn disabled' : 'btn'} 
+          onClick={(e) => handleClickPages(e) }
+        ><span role="img" aria-label="update">🔄</span>
+        </a>
       </h3>) : null}
 
     </nav>
