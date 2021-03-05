@@ -36,7 +36,6 @@ const Form = ({movies, onKeyUp, onClick}) => {
   }, [movies, inputText]);
   return (
     <nav>
-
       <h3>
         <input 
           id="search-input" 
