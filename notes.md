@@ -4,7 +4,7 @@
 - create a new component for the form elements and move the form and header into a nav tag which is fixed
 
 - Help from John: https://twitter.com/AuMayeung
-//   You should have page in the array in the 2nd argument in useCallback.
+// You should have page in the array in the 2nd argument in useCallback.
 
 // Then just pass in a function to set the page value to the onKeyUp prop.
 
